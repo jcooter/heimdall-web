@@ -1,5 +1,5 @@
 from django.db import models
-from django.conrib.auth.models import User
+from django.contrib.auth.models import User
 
 class Page(models.Model):
     INFORMATIONAL = 'INFO'
@@ -12,8 +12,8 @@ class Page(models.Model):
     )
 
     submit_date = models.DateTimeField('date submitted')
-    to = models.ForeignKey(User)
-    from = models.ForeignKey(User)
+    to_user = models.ForeignKey(User, related_name='+')
+    from_user = models.ForeignKey(User, related_name='+')
     short_message = models.CharField('short message', max_length=80)
     long_message = models.TextField('full message')
     severity = models.CharField(max_length=4, choices=SEVERITY_CHOICES, default=INFORMATIONAL)
